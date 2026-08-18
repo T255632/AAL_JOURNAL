@@ -1,0 +1,17 @@
+{
+  "name": "AAL Journal",
+  "short_name": "AAL Journal",
+  "description": "Trading journal operating system for performance, discipline, analytics, and review.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#0b0e14",
+  "icons": [
+    {
+      "src": "/aal_logo.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
