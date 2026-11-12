@@ -1853,7 +1853,7 @@ function exportCSV(trades=data.trades){
 /* Accounts */
 function renderAccounts(){
   return `
-    ${pageHead('Trading Accounts &amp; Prop Firms','Manage multiple live, demo, or funded prop accounts and their risk parameters.',`<button class="btn btn-primary" onclick="editAccount()">＋ Add Account</button>`)}
+    ${pageHead('Trading Accounts; Prop Firms','Manage multiple live, demo, or funded prop accounts and their risk parameters.',`<button class="btn btn-primary" onclick="editAccount()">＋ Add Account</button>`)}
     <div class="grid grid-3">
       ${data.accounts.map(a=>{
         const ts=data.trades.filter(t=>t.accountId===a.id),m=metrics(ts),bal=accountBalance(a);
