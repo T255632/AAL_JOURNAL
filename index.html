@@ -639,17 +639,17 @@ function seedDemoIfEmpty(){
       realizedPnl:s[2],
       realizedR:s[3],
       result:resultOf({realizedPnl:s[2]}),
-      thesis:'High-probability institutional POI mitigation following external liquidity raid.',
+      thesis:'High-probability POI mitigation following external liquidity raid.',
       entryReason:'Clean sweep of Asia high + BOS on 5m chart.',
       exitReason:'Hit 3R profit target at liquidity pool.',
       wentWell:s[4]?'Patiently waited for sweep confirmation.':'Chased execution.',
       wentWrong:s[4]?'None. Clean execution.':'Entered before mitigation completed.',
       lesson:s[4]?'Patience creates the asymmetric edge.':'Always wait for confirmation close.',
-      tags:'pro, verified, institutional',
+      tags:'pro, verified,',
       emotionBefore:'Focused',
       emotionAfter:s[2]>=0?'Calm':'Disciplined',
       checklist:{marketStructure:s[4],premiumDiscount:s[4],liquidity:s[4],supplyDemand:s[4],liquidityBeforeBos:s[4]},
-      checklistNotes:{evidence:'All 5 institutional confluences validated on 15m/4H timeframe.'},
+      checklistNotes:{evidence:'All 5 confluences validated on 15m/4H timeframe.'},
       attachments:{},
       createdAt:new Date().toISOString(),
       updatedAt:new Date().toISOString()
@@ -778,7 +778,7 @@ function renderAuth(){
         <h1 class="hero-title">The plan before the profit, <span>The discipline before the payout.</span></h1>
         <p class="hero-copy">An elite-tier trading workspace designed for rigorous multi-rule validation, psychological tracking, and seamless cloud synchronization via Supabase.</p>
         <div class="hero-features">
-          <div class="feature-chip"><b>5-Rule Guardrail</b><span class="small muted">Strict institutional checklists before execution.</span></div>
+          <div class="feature-chip"><b>5-Rule Guardrail</b><span class="small muted">Strict checklists before execution.</span></div>
           <div class="feature-chip"><b>Supabase Cloud</b><span class="small muted">Secure multi-device sync with instant backup.</span></div>
           <div class="feature-chip"><b>Professional UI</b><span class="small muted">Sleek black, red, white &amp; grey aesthetic.</span></div>
         </div>
@@ -1053,12 +1053,12 @@ function renderTradeForm(){
   const pbNames=[...new Set(data.playbooks.map(p=>p.name))];
 
   return `
-    ${pageHead(existing?'Edit Execution':'Log New Execution','Record institutional parameters, risk parameters, and five-rule checklist confluences.',`<button class="btn btn-ghost" onclick="go('history')">Cancel</button><button class="btn btn-primary" onclick="$('#trade-form').requestSubmit()">Save Execution</button>`)}
+    ${pageHead(existing?'Edit Execution':'Log New Execution','Record parameters, risk parameters, and five-rule checklist confluences.',`<button class="btn btn-ghost" onclick="go('history')">Cancel</button><button class="btn btn-primary" onclick="$('#trade-form').requestSubmit()">Save Execution</button>`)}
     <form id="trade-form" class="card" onsubmit="saveTrade(event)">
       <div class="form-section">
         <div id="setup-verdict" class="verdict ${allChecklist(t)?'good':'bad'}">
           <div>
-            <b>${allChecklist(t)?'Valid Setup — All 5 Institutional Rules Confirmed.':'Incomplete Setup Guardrail.'}</b>
+            <b>${allChecklist(t)?'Valid Setup — All 5 Rules Confirmed.':'Incomplete Setup Guardrail.'}</b>
             <div class="small muted" id="setup-missing">${allChecklist(t)?'Checklist passed successfully.':'Complete all required confluences to maintain structural edge.'}</div>
           </div>
           <span class="badge ${allChecklist(t)?'badge-valid':'badge-warn'}" id="setup-score">${Object.values(t.checklist).filter(Boolean).length}/5</span>
@@ -1090,7 +1090,7 @@ function renderTradeForm(){
         </div>
       </div>
       <div class="form-section">
-        <h3>Institutional Pricing &amp; Risk Calculations</h3>
+        <h3> Pricing ; Risk Calculations</h3>
         <div class="form-grid">
           <div class="field"><label>Entry Price</label><input class="input calc" name="entryPrice" inputmode="decimal" value="${attr(t.entryPrice)}"></div>
           <div class="field"><label>Stop-Loss Price</label><input class="input calc" name="stopLoss" inputmode="decimal" value="${attr(t.stopLoss)}"></div>
@@ -1112,7 +1112,7 @@ function renderTradeForm(){
         <div class="small muted" style="margin-top:14px">Calculations automatically evaluate price distance × position size × point value minus fees. Manual overrides are permitted.</div>
       </div>
       <div class="form-section">
-        <h3>Five-Rule Institutional Checklist</h3>
+        <h3>Five-Rule Checklist</h3>
         <div class="checklist">
           ${checkCard('marketStructure','1. Market Structure','BOS or CHoCH confirmed on HTF.',t.checklist.marketStructure)}
           ${checkCard('premiumDiscount','2. Premium / Discount','Price located in optimal dealing range.',t.checklist.premiumDiscount)}
@@ -1176,7 +1176,7 @@ function updateChecklistUI(){
   const complete=count===5;
   const v=$('#setup-verdict');
   v.className='verdict '+(complete?'good':'bad');
-  v.querySelector('b').textContent=complete?'Valid Setup — All 5 Institutional Rules Confirmed.':'Incomplete Setup Guardrail.';
+  v.querySelector('b').textContent=complete?'Valid Setup — All 5 Rules Confirmed.':'Incomplete Setup Guardrail.';
   $('#setup-score').textContent=count+'/5';
   $('#setup-score').className='badge '+(complete?'badge-valid':'badge-warn');
   const missing=names.filter((_,i)=>!values[i]).map(n=>({marketStructure:'Market Structure',premiumDiscount:'Premium/Discount',liquidity:'Liquidity',supplyDemand:'Supply/Demand',liquidityBeforeBos:'Liquidity before BOS'}[n]));
@@ -1350,7 +1350,7 @@ function viewTrade(id){
           <div class="metric-card card"><div class="metric-label">Checklist Status</div><div style="margin-top:12px">${complianceBadge(t)}</div></div>
         </div>
         <div class="grid grid-2" style="margin-top:20px">
-          <div class="card card-pad"><h3>Institutional Parameters</h3>${detailRows([['Account',accountById(t.accountId)?.name],['Date',prettyDate(t.tradeDate)],['Direction',t.direction],['Session',t.session],['Entry',t.entryPrice],['Stop-Loss',t.stopLoss],['Take-Profit',t.takeProfit],['Exit',t.exitPrice],['Position Size',t.positionSize],['Risk Amount',money(t.riskAmount,currencyForTrade(t))],['Planned R:R',t.plannedRR]])}</div>
+          <div class="card card-pad"><h3> Parameters</h3>${detailRows([['Account',accountById(t.accountId)?.name],['Date',prettyDate(t.tradeDate)],['Direction',t.direction],['Session',t.session],['Entry',t.entryPrice],['Stop-Loss',t.stopLoss],['Take-Profit',t.takeProfit],['Exit',t.exitPrice],['Position Size',t.positionSize],['Risk Amount',money(t.riskAmount,currencyForTrade(t))],['Planned R:R',t.plannedRR]])}</div>
           <div class="card card-pad"><h3>5-Rule Checklist</h3>${detailRows([['Market Structure',c.marketStructure?'Confirmed':'Missing'],['Premium / Discount',c.premiumDiscount?'Confirmed':'Missing'],['Liquidity',c.liquidity?'Confirmed':'Missing'],['Supply / Demand',c.supplyDemand?'Confirmed':'Missing'],['Liquidity before BOS',c.liquidityBeforeBos?'Confirmed':'Missing']])}<div class="alert ${allChecklist(t)?'alert-success':'alert-warn'}" style="margin-top:16px">${allChecklist(t)?'Valid setup. All 5 confluences met.':'Incomplete setup guardrail.'}</div></div>
         </div>
         <div class="grid grid-2" style="margin-top:20px">
@@ -1466,7 +1466,7 @@ function renderAnalytics(){
   const cur=data.profile.baseCurrency;
   const max=Math.max(1,...group.map(x=>Math.abs(x.net)));
   return `
-    ${pageHead('Advanced Analytics','Deep statistical breakdown derived from closed institutional executions.',`<button class="btn btn-ghost" onclick="go('reports')">Open Reports</button>`)}
+    ${pageHead('Advanced Analytics','Deep statistical breakdown derived from closed executions.',`<button class="btn btn-ghost" onclick="go('reports')">Open Reports</button>`)}
     <div class="grid grid-4">
       <div class="card metric-card"><div class="metric-label">Gross Profit</div><div class="metric-value positive">${money(m.grossProfit,cur)}</div></div>
       <div class="card metric-card"><div class="metric-label">Gross Loss</div><div class="metric-value negative">${money(m.grossLoss,cur)}</div></div>
@@ -1543,7 +1543,7 @@ function groupByMonth(trades){
 /* Playbook */
 function renderPlaybook(){
   return `
-    ${pageHead('Institutional Playbooks','Define repeatable setups and evaluate their statistical performance.',`<button class="btn btn-primary" onclick="editPlaybook()">＋ New Setup</button>`)}
+    ${pageHead('Formidable Playbooks','Define repeatable setups and evaluate their statistical performance.',`<button class="btn btn-primary" onclick="editPlaybook()">＋ New Setup</button>`)}
     ${data.playbooks.length?`<div class="setup-cards">${data.playbooks.map(p=>{
       const ts=data.trades.filter(t=>String(t.setup).toLowerCase()===String(p.name).toLowerCase());
       const m=metrics(ts);const score=ts.length?Math.round(m.complianceRate):0;
@@ -1693,7 +1693,7 @@ function renderAIReview(){
   const selectedTrade=closed.find(t=>t.id===ui.reviewTradeId)||closed[0];
   const lastReview=selectedTrade?data.reviews.filter(r=>r.tradeId===selectedTrade.id).sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt))[0]:null;
   return `
-    ${pageHead('Institutional Review Engine','Automated rule-based evaluation of your saved trade parameters and checklist confluences.',`<span class="badge badge-valid">Active Guardrail</span>`)}
+    ${pageHead(' Review Engine','Automated rule-based evaluation of your saved trade parameters and checklist confluences.',`<span class="badge badge-valid">Active Guardrail</span>`)}
     <div class="alert alert-info" style="margin-bottom:20px"><b>Rule Engine:</b> This system analyzes saved risk parameters, five-rule checklist confluences, and journal notes to deliver professional trade diagnostics.</div>
     <div class="grid grid-3">
       <section class="card">
@@ -1735,7 +1735,7 @@ async function generateReview(id){
     ruleViolations:missing,
     riskAssessment:riskOver?`Risk ${num(t.riskPct).toFixed(2)}% exceeded account limit of ${num(account?.riskLimitPct).toFixed(2)}%.`:`Risk parameters maintained within institutional limits.`,
     executionAssessment:compliant?(num(t.realizedR)>=0?'Execution followed saved checklist rules with positive expectancy outcome.':'Checklist complete, but trade resulted in loss. Review execution timing.'):'Execution noncompliant due to missing checklist confluences.',
-    whatWasDoneWell:t.wentWell||(compliant?'All 5 institutional confluences validated.':'Trade logged for professional audit.'),
+    whatWasDoneWell:t.wentWell||(compliant?'All 5 confluences validated.':'Trade logged for professional audit.'),
     mainMistake:t.wentWrong||(missing.length?`Missing confluences: ${missing.join(', ')}.`:'None documented.'),
     oneClearLesson:t.lesson||(compliant?'Maintain disciplined adherence to checklist guardrails.':'Wait for complete setup confirmation.'),
     auditMetadata:{engine:'Formidable Trading Professional Rule Engine',version:APP_VERSION,generatedAt:new Date().toISOString()}
@@ -1744,7 +1744,7 @@ async function generateReview(id){
   data.reviews.push({id:uid('review'),tradeId:id,output,createdAt:new Date().toISOString()});
   ui.reviewTradeId=id;
   await pushToCloud();
-  toast('Institutional review generated.');
+  toast(' review generated.');
   render();
 }
 function renderReview(o){
@@ -1813,7 +1813,7 @@ function renderReports(){
   const list=reportTrades(),m=metrics(list),cur=data.profile.baseCurrency;
   const bySetup=groupPerformance(list,'setup').slice(0,8);
   return `
-    ${pageHead('Institutional Reports','Generate printable performance summaries, executive audits, and CSV data exports.',`<button class="btn btn-ghost" onclick="window.print()">Print / PDF</button><button class="btn btn-primary" onclick="exportCSV(reportTrades())">Export CSV</button>`)}
+    ${pageHead(' Reports','Generate printable performance summaries, executive audits, and CSV data exports.',`<button class="btn btn-ghost" onclick="window.print()">Print / PDF</button><button class="btn btn-primary" onclick="exportCSV(reportTrades())">Export CSV</button>`)}
     <div class="card no-print" style="margin-bottom:20px">
       <div class="card-pad toolbar">
         <div class="field" style="margin:0"><label>From Date</label><input class="input" type="date" value="${attr(ui.reportFrom)}" onchange="ui.reportFrom=this.value;render()"></div>
